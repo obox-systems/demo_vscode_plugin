@@ -22,6 +22,27 @@
         {
           "command": "extension.listCustomCommands",
           "title": "Modify With Utilities"
+        },
+        {
+          "command": "extension.invokeByKeys",
+          "title": "Modify With Utilities"
+        }
+      ],
+      "keybindings":[
+        {
+          "command": "extension.customPlaceholder1",
+          "key": "ctrl+e ctrl+1",
+          "when": "editorTextFocus && editorHasSelection"
+        },
+        {
+          "command": "extension.customPlaceholder2",
+          "key": "ctrl+e ctrl+2",
+          "when": "editorTextFocus && editorHasSelection"
+        },
+        {
+          "command": "extension.customPlaceholder3",
+          "key": "ctrl+e ctrl+3",
+          "when": "editorTextFocus && editorHasSelection"
         }
       ],
       "configuration": {
@@ -51,7 +72,8 @@
                 },
                 "keybinding": {
                   "type": "string",
-                  "description": "Keybindings for custom command"
+                  "description": "Keybindings for custom command",
+                  "enum": ["ctrl+e ctrl+1", "ctrl+e ctrl+2", "ctrl+e ctrl+3"]
                 }
               },
               "required": ["alias", "path"]
