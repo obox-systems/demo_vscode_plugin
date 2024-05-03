@@ -1,0 +1,78 @@
+{
+    "name": "custom-text-modification",
+    "displayName": "CustomTextModification",
+    "description": "Modify Text with Custom Utility",
+    "version": "0.0.1",
+    "private": true,
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Wandalen/demo_vscode_plugin"
+    },
+    "engines": {
+      "vscode": "^1.74.0"
+    },
+    "categories": [
+      "Other"
+    ],
+    "activationEvents": ["onStartupFinished"],
+    "main": "./out/extension",
+    "contributes": {
+      "commands": [
+        {
+          "command": "extension.listCustomCommands",
+          "title": "Modify With Utilities"
+        }
+      ],
+      "configuration": {
+        "title": "Text Modification with Custom Utility",
+        "properties": {
+          "customModification.custom": {
+            "type": "array",
+            "description": "Defines custom commands",
+            "items": {
+              "type": "object",
+              "properties": {
+                "alias": {
+                  "type": "string",
+                  "description": "Name of the command"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "Path to the utility to be executed"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label to be shown in commands list"
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "Description of the command"
+                },
+                "keybinding": {
+                  "type": "string",
+                  "description": "Keybindings for custom command"
+                }
+              },
+              "required": ["alias", "path"]
+            },
+            "default": []
+          }
+        }
+      }
+    },
+    "scripts": {
+      "vscode:prepublish": "npm run compile",
+      "compile": "tsc -p ./",
+      "lint": "eslint \"src/**/*.ts\"",
+      "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+      "@types/node": "^18",
+      "@types/vscode": "^1.73.0",
+      "@typescript-eslint/eslint-plugin": "^6.7.0",
+      "@typescript-eslint/parser": "^6.7.0",
+      "eslint": "^8.26.0",
+      "typescript": "^5.4.2"
+    }
+  }
