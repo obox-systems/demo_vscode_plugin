@@ -1,14 +1,13 @@
 {
-    "name": "reverseword",
-    "displayName": "ReverseWord",
-    "description": "Reverse a word",
+    "name": "custom-text-modification",
+    "displayName": "CustomTextModification",
+    "description": "Modify Text with Custom Utility",
     "version": "0.0.1",
-    "publisher": "rebornix",
     "private": true,
     "license": "MIT",
     "repository": {
       "type": "git",
-      "url": "https://github.com/Microsoft/vscode-extension-samples"
+      "url": "https://github.com/Wandalen/demo_vscode_plugin"
     },
     "engines": {
       "vscode": "^1.74.0"
@@ -16,19 +15,51 @@
     "categories": [
       "Other"
     ],
-    "activationEvents": [],
+    "activationEvents": ["onStartupFinished"],
     "main": "./out/extension",
     "contributes": {
       "commands": [
         {
-          "command": "extension.reverseWord",
-          "title": "Reverse Word"
-        },
-        {
-          "command": "extension.modifySelected",
-          "title": "Modify Selected"
+          "command": "extension.listCustomCommands",
+          "title": "Modify With Utilities"
         }
-      ]
+      ],
+      "configuration": {
+        "title": "Text Modification with Custom Utility",
+        "properties": {
+          "customModification.custom": {
+            "type": "array",
+            "description": "Defines custom commands",
+            "items": {
+              "type": "object",
+              "properties": {
+                "alias": {
+                  "type": "string",
+                  "description": "Name of the command"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "Path to the utility to be executed"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label to be shown in commands list"
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "Description of the command"
+                },
+                "keybinding": {
+                  "type": "string",
+                  "description": "Keybindings for custom command"
+                }
+              },
+              "required": ["alias", "path"]
+            },
+            "default": []
+          }
+        }
+      }
     },
     "scripts": {
       "vscode:prepublish": "npm run compile",
