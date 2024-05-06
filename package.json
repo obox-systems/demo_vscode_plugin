@@ -20,65 +20,69 @@
     "contributes": {
       "commands": [
         {
-          "command": "extension.listCustomCommands",
-          "title": "Modify With Utilities"
-        },
-        {
-          "command": "extension.invokeByKeys",
-          "title": "Modify With Utilities"
-        }
-      ],
-      "keybindings":[
-        {
-          "command": "extension.customPlaceholder1",
-          "key": "ctrl+e ctrl+1",
-          "when": "editorTextFocus && editorHasSelection"
-        },
-        {
-          "command": "extension.customPlaceholder2",
-          "key": "ctrl+e ctrl+2",
-          "when": "editorTextFocus && editorHasSelection"
-        },
-        {
-          "command": "extension.customPlaceholder3",
-          "key": "ctrl+e ctrl+3",
-          "when": "editorTextFocus && editorHasSelection"
+          "command": "extension.runCustomCommand",
+          "title": "Run custom command"
         }
       ],
       "configuration": {
+        "type": "object",
         "title": "Text Modification with Custom Utility",
         "properties": {
-          "customModification.custom": {
+          "extension.currentDirectoryKind": {
+            "description": "Current directory for shell commands",
+            "type": "string",
+            "enum": [
+              "currentFile",
+              "workspaceRoot"
+            ],
+            "default": "currentFile"
+          },
+          "extension.shell.linux": {
+            "description": "Linux shell used to run commands",
+            "type": "string",
+            "default": "/bin/sh"
+          },
+          "extension.shellArgs.linux": {
+            "description": "Additional arguments for the shell",
             "type": "array",
-            "description": "Defines custom commands",
             "items": {
-              "type": "object",
-              "properties": {
-                "alias": {
-                  "type": "string",
-                  "description": "Name of the command"
-                },
-                "path": {
-                  "type": "string",
-                  "description": "Path to the utility to be executed"
-                },
-                "label": {
-                  "type": "string",
-                  "description": "Label to be shown in commands list"
-                },
-                "detail": {
-                  "type": "string",
-                  "description": "Description of the command"
-                },
-                "keybinding": {
-                  "type": "string",
-                  "description": "Keybindings for custom command",
-                  "enum": ["ctrl+e ctrl+1", "ctrl+e ctrl+2", "ctrl+e ctrl+3"]
-                }
-              },
-              "required": ["alias", "path"]
+              "type": "string"
             },
-            "default": []
+            "default": [
+              "-c"
+            ]
+          },
+          "extension.shell.osx": {
+            "description": "OSX shell used to run commands",
+            "type": "string",
+            "default": "/bin/sh"
+          },
+          "extension.shellArgs.osx": {
+            "description": "Additional arguments for the shell",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "-c"
+            ]
+          },
+          "extension.shell.windows": {
+            "description": "Windows shell used to run commands",
+            "type": "string",
+            "default": "cmd.exe"
+          },
+          "extension.shellArgs.windows": {
+            "description": "Additional arguments for the shell",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "/d",
+              "/s",
+              "/c"
+            ]
           }
         }
       }
