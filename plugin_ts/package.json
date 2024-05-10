@@ -22,12 +22,97 @@
         {
           "command": "extension.runCustomCommand",
           "title": "Run custom command"
+        },
+        {
+          "command": "extension.quickCommand1",
+          "title": "Run quick command 1",
+          "category": "RunCustomCommand"
+        },
+        {
+          "command": "extension.quickCommand2",
+          "title": "Run quick command 2",
+          "category": "RunCustomCommand"
+        },
+        {
+          "command": "extension.quickCommand3",
+          "title": "Run quick command 3",
+          "category": "RunCustomCommand"
+        },
+        {
+          "command": "extension.quickCommand4",
+          "title": "Run quick command 4",
+          "category": "RunCustomCommand"
+        },
+        {
+          "command": "extension.quickCommand5",
+          "title": "Run quick command 5",
+          "category": "RunCustomCommand"
         }
       ],
       "configuration": {
         "type": "object",
         "title": "Text Modification with Custom Utility",
         "properties": {
+          "extension.quickCommand1": {
+            "description": "Configuration of favorite command triggered by quick command 1",
+            "type": "object",
+            "properties": {
+                "command": {
+                    "type": "string"
+                },
+                "arguments": {
+                    "type": "array"
+                }
+            }
+          },
+          "extension.quickCommand2": {
+              "description": "Configuration of favorite command triggered by quick command 2",
+              "type": "object",
+              "properties": {
+                  "command": {
+                      "type": "string"
+                  },
+                  "arguments": {
+                      "type": "array"
+                  }
+              }
+          },
+          "extension.quickCommand3": {
+              "description": "Configuration of favorite command triggered by quick command 3",
+              "type": "object",
+              "properties": {
+                  "command": {
+                      "type": "string"
+                  },
+                  "arguments": {
+                      "type": "array"
+                  }
+              }
+          },
+          "extension.quickCommand4": {
+              "description": "Configuration of favorite command triggered by quick command 4",
+              "type": "object",
+              "properties": {
+                  "command": {
+                      "type": "string"
+                  },
+                  "arguments": {
+                      "type": "array"
+                  }
+              }
+          },
+          "extension.quickCommand5": {
+              "description": "Configuration of favorite command triggered by quick command 5",
+              "type": "object",
+              "properties": {
+                  "command": {
+                      "type": "string"
+                  },
+                  "arguments": {
+                      "type": "array"
+                  }
+              }
+          },
           "extension.currentDirectoryKind": {
             "description": "Current directory for shell commands",
             "type": "string",

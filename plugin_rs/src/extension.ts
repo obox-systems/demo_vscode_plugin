@@ -4,13 +4,67 @@ import * as vscode from 'vscode';
 import { getCommandText, getConfig, getOS } from './helpers' ;
 import { modifyWithCommand } from '../custom_command/index'
 
-
 export async function activate(context: vscode.ExtensionContext) {
 	vscode.commands.registerCommand('extension.runCustomCommand', async () => {
 		const command = await getCommandText();
 		if (!command) return;
-	
+
 		await modifySelected(command);
+	});
+
+	vscode.commands.registerCommand('extension.quickCommand1', async () => {
+		const command = getConfig("extension.quickCommand1.command");
+		if (!command) {
+			vscode.window.showErrorMessage(`Failed to execute quick command1: quickCommand1 is not configured`);
+			return;
+		}
+			
+		const args = getConfig("extension.quickCommand1.arguments");
+		await modifySelected(`${command} ${args}`);
+	});
+
+	vscode.commands.registerCommand('extension.quickCommand2', async () => {
+		const command = getConfig("extension.quickCommand2.command");
+		if (!command) {
+			vscode.window.showErrorMessage(`Failed to execute quick command2: quickCommand2 is not configured`);
+			return;
+		}
+			
+		const args = getConfig("extension.quickCommand2.arguments");
+		await modifySelected(`${command} ${args}`);
+	});
+
+	vscode.commands.registerCommand('extension.quickCommand3', async () => {
+		const command = getConfig("extension.quickCommand3.command");
+		if (!command) {
+			vscode.window.showErrorMessage(`Failed to execute quick command3: quickCommand3 is not configured`);
+			return;
+		}
+			
+		const args = getConfig("extension.quickCommand3.arguments");
+		await modifySelected(`${command} ${args}`);
+	});
+
+	vscode.commands.registerCommand('extension.quickCommand4', async () => {
+		const command = getConfig("extension.quickCommand4.command");
+		if (!command) {
+			vscode.window.showErrorMessage(`Failed to execute quick command4: quickCommand4 is not configured`);
+			return;
+		}
+			
+		const args = getConfig("extension.quickCommand4.arguments");
+		await modifySelected(`${command} ${args}`);
+	});
+
+	vscode.commands.registerCommand('extension.quickCommand5', async () => {
+		const command = getConfig("extension.quickCommand5.command");
+		if (!command) {
+			vscode.window.showErrorMessage(`Failed to execute quick command5: quickCommand5 is not configured`);
+			return;
+		}
+			
+		const args = getConfig("extension.quickCommand5.arguments");
+		await modifySelected(`${command} ${args}`);
 	});
 }
 
