@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "runtimeExecutable": "${execPath}",
+            "args": [
+                "--extensionDevelopmentPath=${workspaceFolder}/plugin_rs"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/plugin_rs/out/**/*.js"
+            ],
+            "preLaunchTask": "npm: watch"
+        },
+        {
+            "name": "Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "runtimeExecutable": "${execPath}",
+            "args": [
+                "--extensionDevelopmentPath=${workspaceFolder}/plugin_ts"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/plugin_ts/out/**/*.js"
+            ],
+            "preLaunchTask": "npm: watch"
+        }
+    ]
+}

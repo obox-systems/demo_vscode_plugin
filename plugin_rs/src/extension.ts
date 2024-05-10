@@ -1,71 +1,43 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { getCommandText, getConfig, getOS } from './helpers' ;
-import { modifyWithCommand } from '../custom_command/index'
+import { getCommandText, getConfig, getOS, EXTENSION_NAME, getHistory } from './helpers';
+import { modifyWithCommand } from '../custom_command/index';
+
+const CUSTOM_COMMANDS_NUMBER = 5;
+
+// // Define a key for storing history
+// const HISTORY_KEY = `${EXTENSION_NAME}.history`;
+
+// // Function to retrieve history from workspaceState
+// function getHistory(): string[] {
+//     const storedHistory = getConfig(`${EXTENSION_NAME}.history`) as string[];
+//     return storedHistory || [];
+// }
 
 export async function activate(context: vscode.ExtensionContext) {
-	vscode.commands.registerCommand('extension.runCustomCommand', async () => {
+	vscode.commands.registerCommand(`${EXTENSION_NAME}.runCommand`, async () => {
+		vscode.window.showWarningMessage("command");
 		const command = await getCommandText();
 		if (!command) return;
+		vscode.window.showWarningMessage(command);
+		updateHistory(command);
 
 		await modifySelected(command);
 	});
 
-	vscode.commands.registerCommand('extension.quickCommand1', async () => {
-		const command = getConfig("extension.quickCommand1.command");
-		if (!command) {
-			vscode.window.showErrorMessage(`Failed to execute quick command1: quickCommand1 is not configured`);
-			return;
-		}
+	for (let i = 1; i <= CUSTOM_COMMANDS_NUMBER; i++) {
+		vscode.commands.registerCommand(`${EXTENSION_NAME}.quickCommand${i}`, async () => {
+			const command = getConfig(`${EXTENSION_NAME}.quickCommand${i}.command`);
+			if (!command) {
+				vscode.window.showErrorMessage(`Failed to execute quick command${i}: quickCommand${i} is not configured in extension setings`);
+				return;
+			}
 			
-		const args = getConfig("extension.quickCommand1.arguments");
-		await modifySelected(`${command} ${args}`);
-	});
-
-	vscode.commands.registerCommand('extension.quickCommand2', async () => {
-		const command = getConfig("extension.quickCommand2.command");
-		if (!command) {
-			vscode.window.showErrorMessage(`Failed to execute quick command2: quickCommand2 is not configured`);
-			return;
-		}
-			
-		const args = getConfig("extension.quickCommand2.arguments");
-		await modifySelected(`${command} ${args}`);
-	});
-
-	vscode.commands.registerCommand('extension.quickCommand3', async () => {
-		const command = getConfig("extension.quickCommand3.command");
-		if (!command) {
-			vscode.window.showErrorMessage(`Failed to execute quick command3: quickCommand3 is not configured`);
-			return;
-		}
-			
-		const args = getConfig("extension.quickCommand3.arguments");
-		await modifySelected(`${command} ${args}`);
-	});
-
-	vscode.commands.registerCommand('extension.quickCommand4', async () => {
-		const command = getConfig("extension.quickCommand4.command");
-		if (!command) {
-			vscode.window.showErrorMessage(`Failed to execute quick command4: quickCommand4 is not configured`);
-			return;
-		}
-			
-		const args = getConfig("extension.quickCommand4.arguments");
-		await modifySelected(`${command} ${args}`);
-	});
-
-	vscode.commands.registerCommand('extension.quickCommand5', async () => {
-		const command = getConfig("extension.quickCommand5.command");
-		if (!command) {
-			vscode.window.showErrorMessage(`Failed to execute quick command5: quickCommand5 is not configured`);
-			return;
-		}
-			
-		const args = getConfig("extension.quickCommand5.arguments");
-		await modifySelected(`${command} ${args}`);
-	});
+			const args = getConfig(`${EXTENSION_NAME}.quickCommand${i}.arguments`);
+			await modifySelected(`${command} ${args}`);
+		});
+	}
 }
 
 async function modifySelected(command: string): Promise<void> {
@@ -94,8 +66,19 @@ async function modifySelected(command: string): Promise<void> {
 
 async function runCommand(command: string, input: string, filePath: string|undefined): Promise<string> {
 	const os = getOS();
-	const shell = getConfig(`extension.shell.${os}`) as string;
-	const shellArgs = getConfig(`extension.shellArgs.${os}`) as string[];
+	const shell = getConfig(`CustomTextModification.shell.${os}`) as string;
+	const shellArgs = getConfig(`CustomTextModification.shellArgs.${os}`) as string[];
 	const result = modifyWithCommand(shell, shellArgs, command, input);
 	return result;
+}
+
+// Function to update and save history to workspaceState
+function updateHistory(newCommand: string): void {
+	vscode.window.showWarningMessage(newCommand);
+    const history = getHistory();
+    history.push(newCommand);
+	if (history.length == 1) {
+		vscode.workspace.getConfiguration().update(`${EXTENSION_NAME}.history`, history, vscode.ConfigurationTarget.Global);
+	}
+    vscode.workspace.getConfiguration().update(`${EXTENSION_NAME}.history`, history, vscode.ConfigurationTarget.Global);
 }

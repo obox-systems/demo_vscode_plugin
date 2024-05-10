@@ -3,6 +3,8 @@
 import * as vscode from 'vscode';
 import {dirname} from 'path';
 
+const EXTENSION_NAME = "CustomTextModification";
+
 function getOS() {
 	const OS_KIND: Record<string, string> = {
 		darwin: 'osx',
@@ -21,7 +23,7 @@ function getConfig(configPath: string) {
 }
 
 function getWorkingDir(filePath?: string) {
-	const configPath = `extension.currentDirectoryKind`;
+	const configPath = `${EXTENSION_NAME}.currentDirectoryKind`;
 	const currentDirectoryKind = getConfig(configPath);
 
 	switch (currentDirectoryKind) {
@@ -36,11 +38,54 @@ function getWorkingDir(filePath?: string) {
 	}
 }
 
-async function getCommandText(): Promise<string|undefined> {
-	return vscode.window.showInputBox({
-		placeHolder: 'Enter a command',
-		prompt: 'No history available yet'
-	});
+// Function to retrieve history from workspaceState
+function getHistory(): string[] {
+    const storedHistory = getConfig(`${EXTENSION_NAME}.history`) as string[];
+    return storedHistory || [];
 }
 
-export {getCommandText, getConfig, getWorkingDir, getOS};
+// Function to display history and prompt user to choose previous arguments
+async function chooseFromHistory(): Promise<string | undefined> {
+    const history = getHistory();
+    const picked = await vscode.window.showQuickPick(history, {
+        placeHolder: 'Select from history',
+        ignoreFocusOut: true,
+    });
+    return picked;
+}
+
+async function getCommandText(): Promise<string|undefined> {
+	// const selectedArgs = await chooseFromHistory();
+    // if (!selectedArgs) {
+    //     return; // User canceled selection
+    // }
+    // // Execute command with selectedArgs
+	// return vscode.window.showInputBox({
+	// 	placeHolder: 'Enter a command',
+	// 	prompt: 'No history available yet'
+	// });
+
+	const history = getHistory();
+	if (history.length === 0) {
+		return vscode.window.showInputBox({
+			placeHolder: 'Enter a command',
+			prompt: 'No history available yet'
+		});
+	}
+
+	const placeholder = {placeHolder: 'Select a command to reuse or Cancel (Esc) to write a new command'};
+	const pickedCommand = await vscode.window.showQuickPick(history.reverse(), placeholder);
+
+	// return this.letUserToModifyCommand(pickedCommand);
+	const options = this.getInputBoxOption(pickedCommand);
+	return this.vsWindow.showInputBox(options);
+
+	//const history = getHistory();
+    const picked = await vscode.window.showQuickPick(history, {
+        placeHolder: 'Select from history',
+        ignoreFocusOut: true,
+    });
+    return picked;
+}
+
+export {getCommandText, getConfig, getWorkingDir, getOS, EXTENSION_NAME, getHistory};

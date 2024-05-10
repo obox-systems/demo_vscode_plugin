@@ -3,6 +3,8 @@
 import * as vscode from 'vscode';
 import {dirname} from 'path';
 
+const EXTENSION_NAME = "CustomTextModification";
+
 function getOS() {
 	const OS_KIND: Record<string, string> = {
 		darwin: 'osx',
@@ -21,7 +23,7 @@ function getConfig(configPath: string) {
 }
 
 function getWorkingDir(filePath?: string) {
-	const configPath = `extension.currentDirectoryKind`;
+	const configPath = `${EXTENSION_NAME}.currentDirectoryKind`;
 	const currentDirectoryKind = getConfig(configPath);
 
 	switch (currentDirectoryKind) {
@@ -43,4 +45,4 @@ async function getCommandText(): Promise<string|undefined> {
 	});
 }
 
-export {getCommandText, getConfig, getWorkingDir, getOS};
+export {getCommandText, getConfig, getWorkingDir, getOS, EXTENSION_NAME};

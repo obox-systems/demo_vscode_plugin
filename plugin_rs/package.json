@@ -15,47 +15,49 @@
     "categories": [
         "Other"
     ],
-    "activationEvents": [
-        "onStartupFinished"
-    ],
+    "activationEvents": ["onStartupFinished"],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.runCustomCommand",
-                "title": "Run custom command"
+                "command": "CustomTextModification.runCommand",
+                "title": "Modify text with utility"
             },
             {
-                "command": "extension.quickCommand1",
-                "title": "Run quick command 1",
-                "category": "RunCustomCommand"
+                "command": "CustomTextModification.quickCommand1",
+                "title": "Modify with quick command 1",
+                "category": "CustomTextModification"
             },
             {
-                "command": "extension.quickCommand2",
-                "title": "Run quick command 2",
-                "category": "RunCustomCommand"
+                "command": "CustomTextModification.quickCommand2",
+                "title": "Modify with quick command 2",
+                "category": "CustomTextModification"
             },
             {
-                "command": "extension.quickCommand3",
-                "title": "Run quick command 3",
-                "category": "RunCustomCommand"
+                "command": "CustomTextModification.quickCommand3",
+                "title": "Modify with quick command 3",
+                "category": "CustomTextModification"
             },
             {
-                "command": "extension.quickCommand4",
-                "title": "Run quick command 4",
-                "category": "RunCustomCommand"
+                "command": "CustomTextModification.quickCommand4",
+                "title": "Modify with quick command 4",
+                "category": "CustomTextModification"
             },
             {
-                "command": "extension.quickCommand5",
-                "title": "Run quick command 5",
-                "category": "RunCustomCommand"
+                "command": "CustomTextModification.quickCommand5",
+                "title": "Modify with quick command 5",
+                "category": "CustomTextModification"
             }
         ],
         "configuration": {
             "type": "object",
             "title": "Text Modification with Custom Utility",
             "properties": {
-                "extension.quickCommand1": {
+                "CustomTextModification.history": {
+                    "description": "History of executed commands",
+                    "type": "array"
+                },
+                "CustomTextModification.quickCommand1": {
                     "description": "Configuration of favorite command triggered by quick command 1",
                     "type": "object",
                     "properties": {
@@ -67,7 +69,7 @@
                         }
                     }
                 },
-                "extension.quickCommand2": {
+                "CustomTextModification.quickCommand2": {
                     "description": "Configuration of favorite command triggered by quick command 2",
                     "type": "object",
                     "properties": {
@@ -79,7 +81,7 @@
                         }
                     }
                 },
-                "extension.quickCommand3": {
+                "CustomTextModification.quickCommand3": {
                     "description": "Configuration of favorite command triggered by quick command 3",
                     "type": "object",
                     "properties": {
@@ -91,7 +93,7 @@
                         }
                     }
                 },
-                "extension.quickCommand4": {
+                "CustomTextModification.quickCommand4": {
                     "description": "Configuration of favorite command triggered by quick command 4",
                     "type": "object",
                     "properties": {
@@ -103,7 +105,7 @@
                         }
                     }
                 },
-                "extension.quickCommand5": {
+                "CustomTextModification.quickCommand5": {
                     "description": "Configuration of favorite command triggered by quick command 5",
                     "type": "object",
                     "properties": {
@@ -115,7 +117,7 @@
                         }
                     }
                 },
-                "extension.currentDirectoryKind": {
+                "CustomTextModification.currentDirectoryKind": {
                     "description": "Current directory for shell commands",
                     "type": "string",
                     "enum": [
@@ -124,12 +126,12 @@
                     ],
                     "default": "currentFile"
                 },
-                "extension.shell.linux": {
+                "CustomTextModification.shell.linux": {
                     "description": "Linux shell used to run commands",
                     "type": "string",
                     "default": "/bin/sh"
                 },
-                "extension.shellArgs.linux": {
+                "CustomTextModification.shellArgs.linux": {
                     "description": "Additional arguments for the shell",
                     "type": "array",
                     "items": {
@@ -139,12 +141,12 @@
                         "-c"
                     ]
                 },
-                "extension.shell.osx": {
+                "CustomTextModification.shell.osx": {
                     "description": "OSX shell used to run commands",
                     "type": "string",
                     "default": "/bin/sh"
                 },
-                "extension.shellArgs.osx": {
+                "CustomTextModification.shellArgs.osx": {
                     "description": "Additional arguments for the shell",
                     "type": "array",
                     "items": {
@@ -154,12 +156,12 @@
                         "-c"
                     ]
                 },
-                "extension.shell.windows": {
+                "CustomTextModification.shell.windows": {
                     "description": "Windows shell used to run commands",
                     "type": "string",
                     "default": "cmd.exe"
                 },
-                "extension.shellArgs.windows": {
+                "CustomTextModification.shellArgs.windows": {
                     "description": "Additional arguments for the shell",
                     "type": "array",
                     "items": {
