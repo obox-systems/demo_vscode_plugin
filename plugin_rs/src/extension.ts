@@ -17,10 +17,9 @@ const CUSTOM_COMMANDS_NUMBER = 5;
 
 export async function activate(context: vscode.ExtensionContext) {
 	vscode.commands.registerCommand(`${EXTENSION_NAME}.runCommand`, async () => {
-		vscode.window.showWarningMessage("command");
 		const command = await getCommandText();
 		if (!command) return;
-		vscode.window.showWarningMessage(command);
+		//vscode.window.showWarningMessage(command);
 		updateHistory(command);
 
 		await modifySelected(command);
@@ -75,10 +74,8 @@ async function runCommand(command: string, input: string, filePath: string|undef
 // Function to update and save history to workspaceState
 function updateHistory(newCommand: string): void {
 	vscode.window.showWarningMessage(newCommand);
+	vscode.window.showWarningMessage("modifing plugin history");
     const history = getHistory();
     history.push(newCommand);
-	if (history.length == 1) {
-		vscode.workspace.getConfiguration().update(`${EXTENSION_NAME}.history`, history, vscode.ConfigurationTarget.Global);
-	}
     vscode.workspace.getConfiguration().update(`${EXTENSION_NAME}.history`, history, vscode.ConfigurationTarget.Global);
 }

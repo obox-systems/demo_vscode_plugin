@@ -38,54 +38,46 @@ function getWorkingDir(filePath?: string) {
 	}
 }
 
-// Function to retrieve history from workspaceState
 function getHistory(): string[] {
     const storedHistory = getConfig(`${EXTENSION_NAME}.history`) as string[];
     return storedHistory || [];
 }
 
-// Function to display history and prompt user to choose previous arguments
-async function chooseFromHistory(): Promise<string | undefined> {
-    const history = getHistory();
-    const picked = await vscode.window.showQuickPick(history, {
-        placeHolder: 'Select from history',
-        ignoreFocusOut: true,
-    });
-    return picked;
-}
-
 async function getCommandText(): Promise<string|undefined> {
-	// const selectedArgs = await chooseFromHistory();
-    // if (!selectedArgs) {
-    //     return; // User canceled selection
-    // }
-    // // Execute command with selectedArgs
-	// return vscode.window.showInputBox({
-	// 	placeHolder: 'Enter a command',
-	// 	prompt: 'No history available yet'
-	// });
 
 	const history = getHistory();
 	if (history.length === 0) {
 		return vscode.window.showInputBox({
 			placeHolder: 'Enter a command',
 			prompt: 'No history available yet'
+
 		});
 	}
 
-	const placeholder = {placeHolder: 'Select a command to reuse or Cancel (Esc) to write a new command'};
+	history.push('Enter new command...');
+
+	const placeholder = {
+		ignoreFocusOut: true,
+		canPickMany: false,
+		placeHolder: 'Select a command option'
+	};
+	vscode.window.showInformationMessage(history.join());
 	const pickedCommand = await vscode.window.showQuickPick(history.reverse(), placeholder);
 
-	// return this.letUserToModifyCommand(pickedCommand);
-	const options = this.getInputBoxOption(pickedCommand);
-	return this.vsWindow.showInputBox(options);
+	const options = getInputBoxOption(pickedCommand);
+	return vscode.window.showInputBox(options);
 
-	//const history = getHistory();
-    const picked = await vscode.window.showQuickPick(history, {
-        placeHolder: 'Select from history',
-        ignoreFocusOut: true,
-    });
-    return picked;
+}
+
+function getInputBoxOption(pickedCommand?: string) {
+	if (pickedCommand == 'Enter new command...' || !pickedCommand) {
+		return {placeHolder: 'Enter a command'};
+	}
+	return {
+		placeHolder: 'Enter a command',
+		prompt: 'Edit the command if necessary',
+		value: pickedCommand
+	};
 }
 
 export {getCommandText, getConfig, getWorkingDir, getOS, EXTENSION_NAME, getHistory};

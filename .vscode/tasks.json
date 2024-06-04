@@ -2,12 +2,63 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "npm: watch",
             "type": "npm",
             "script": "watch",
             "problemMatcher": "$tsc-watch",
+            "path": "plugin_rs",
             "isBackground": true,
             "presentation": {
                 "reveal": "never"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "npm: watch",
+            "type": "npm",
+            "script": "watch",
+            "problemMatcher": "$tsc-watch",
+            "path": "plugin_ts",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "npm: compile",
+            "type": "npm",
+            "script": "compile",
+            "path": "plugin_ts",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "npm: compile",
+            "type": "npm",
+            "script": "compile",
+            "path": "plugin_rs",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
             },
             "group": {
                 "kind": "build",
