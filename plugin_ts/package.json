@@ -1,189 +1,194 @@
 {
-  "name": "custom-text-modification",
-  "displayName": "CustomTextModification",
-  "description": "Modify Text with Custom Utility",
-  "version": "0.0.1",
-  "private": true,
-  "license": "MIT",
-  "repository": {
-      "type": "git",
-      "url": "https://github.com/Wandalen/demo_vscode_plugin"
-  },
-  "engines": {
-      "vscode": "^1.74.0"
-  },
-  "categories": [
-      "Other"
-  ],
-  "activationEvents": ["onStartupFinished"],
-  "main": "./out/extension",
-  "contributes": {
-      "commands": [
-          {
-              "command": "CustomTextModification.runCommand",
-              "title": "Modify text with utility"
-          },
-          {
-              "command": "CustomTextModification.quickCommand1",
-              "title": "Modify with quick command 1",
-              "category": "CustomTextModification"
-          },
-          {
-              "command": "CustomTextModification.quickCommand2",
-              "title": "Modify with quick command 2",
-              "category": "CustomTextModification"
-          },
-          {
-              "command": "CustomTextModification.quickCommand3",
-              "title": "Modify with quick command 3",
-              "category": "CustomTextModification"
-          },
-          {
-              "command": "CustomTextModification.quickCommand4",
-              "title": "Modify with quick command 4",
-              "category": "CustomTextModification"
-          },
-          {
-              "command": "CustomTextModification.quickCommand5",
-              "title": "Modify with quick command 5",
-              "category": "CustomTextModification"
-          }
-      ],
-      "configuration": {
-          "type": "object",
-          "title": "Text Modification with Custom Utility",
-          "properties": {
-              "CustomTextModification.quickCommand1": {
-                  "description": "Configuration of favorite command triggered by quick command 1",
-                  "type": "object",
-                  "properties": {
-                      "command": {
-                          "type": "string"
-                      },
+    "name": "custom-text-modification",
+    "displayName": "CustomTextModification",
+    "description": "Modify Text with Custom Utility",
+    "version": "0.0.1",
+    "private": true,
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Wandalen/demo_vscode_plugin"
+    },
+    "engines": {
+        "vscode": "^1.74.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": ["onStartupFinished"],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "CustomTextModification.runCommand",
+                "title": "Modify text with utility",
+                "category": "CustomTextModification"
+            },
+            {
+                "command": "CustomTextModification.quickCommand1",
+                "title": "Modify with quick command 1",
+                "category": "CustomTextModification"
+            },
+            {
+                "command": "CustomTextModification.quickCommand2",
+                "title": "Modify with quick command 2",
+                "category": "CustomTextModification"
+            },
+            {
+                "command": "CustomTextModification.quickCommand3",
+                "title": "Modify with quick command 3",
+                "category": "CustomTextModification"
+            },
+            {
+                "command": "CustomTextModification.quickCommand4",
+                "title": "Modify with quick command 4",
+                "category": "CustomTextModification"
+            },
+            {
+                "command": "CustomTextModification.quickCommand5",
+                "title": "Modify with quick command 5",
+                "category": "CustomTextModification"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Text Modification with Custom Utility",
+            "properties": {
+                "CustomTextModification.quickCommand1": {
+                    "description": "Configuration of favorite command triggered by quick command 1",
+                    "type": "object",
+                    "properties": {
+                        "command": {
+                            "type": "string"
+                        },
+                        "arguments": {
+                            "type": "array"
+                        }
+                    }
+                },
+                "CustomTextModification.quickCommand2": {
+                    "description": "Configuration of favorite command triggered by quick command 2",
+                    "type": "object",
+                    "properties": {
+                        "command": {
+                            "type": "string"
+                        },
+                        "arguments": {
+                            "type": "array"
+                        }
+                    }
+                },
+                "CustomTextModification.quickCommand3": {
+                    "description": "Configuration of favorite command triggered by quick command 3",
+                    "type": "object",
+                    "properties": {
+                        "command": {
+                            "type": "string"
+                        },
+                        "arguments": {
+                            "type": "array"
+                        }
+                    }
+                },
+                "CustomTextModification.quickCommand4": {
+                    "description": "Configuration of favorite command triggered by quick command 4",
+                    "type": "object",
+                    "properties": {
+                        "command": {
+                            "type": "string"
+                        },
                       "arguments": {
                           "type": "array"
-                      }
-                  }
-              },
-              "CustomTextModification.quickCommand2": {
-                  "description": "Configuration of favorite command triggered by quick command 2",
-                  "type": "object",
-                  "properties": {
-                      "command": {
-                          "type": "string"
-                      },
-                      "arguments": {
-                          "type": "array"
-                      }
-                  }
-              },
-              "CustomTextModification.quickCommand3": {
-                  "description": "Configuration of favorite command triggered by quick command 3",
-                  "type": "object",
-                  "properties": {
-                      "command": {
-                          "type": "string"
-                      },
-                      "arguments": {
-                          "type": "array"
-                      }
-                  }
-              },
-              "CustomTextModification.quickCommand4": {
-                  "description": "Configuration of favorite command triggered by quick command 4",
-                  "type": "object",
-                  "properties": {
-                      "command": {
-                          "type": "string"
-                      },
-                      "arguments": {
-                          "type": "array"
-                      }
-                  }
-              },
-              "CustomTextModification.quickCommand5": {
-                  "description": "Configuration of favorite command triggered by quick command 5",
-                  "type": "object",
-                  "properties": {
-                      "command": {
-                          "type": "string"
-                      },
-                      "arguments": {
-                          "type": "array"
-                      }
-                  }
-              },
-              "CustomTextModification.currentDirectoryKind": {
-                  "description": "Current directory for shell commands",
-                  "type": "string",
-                  "enum": [
-                      "currentFile",
-                      "workspaceRoot"
-                  ],
-                  "default": "currentFile"
-              },
-              "CustomTextModification.shell.linux": {
-                  "description": "Linux shell used to run commands",
-                  "type": "string",
-                  "default": "/bin/sh"
-              },
-              "CustomTextModification.shellArgs.linux": {
-                  "description": "Additional arguments for the shell",
-                  "type": "array",
-                  "items": {
-                      "type": "string"
-                  },
-                  "default": [
-                      "-c"
-                  ]
-              },
-              "CustomTextModification.shell.osx": {
-                  "description": "OSX shell used to run commands",
-                  "type": "string",
-                  "default": "/bin/sh"
-              },
-              "CustomTextModification.shellArgs.osx": {
-                  "description": "Additional arguments for the shell",
-                  "type": "array",
-                  "items": {
-                      "type": "string"
-                  },
-                  "default": [
-                      "-c"
-                  ]
-              },
-              "CustomTextModification.shell.windows": {
-                  "description": "Windows shell used to run commands",
-                  "type": "string",
-                  "default": "cmd.exe"
-              },
-              "CustomTextModification.shellArgs.windows": {
-                  "description": "Additional arguments for the shell",
-                  "type": "array",
-                  "items": {
-                      "type": "string"
-                  },
-                  "default": [
-                      "/d",
-                      "/s",
-                      "/c"
-                  ]
-              }
-          }
-      }
-  },
-  "scripts": {
-      "vscode:prepublish": "npm run compile",
-      "compile": "tsc -p ./",
-      "lint": "eslint \"src/**/*.ts\"",
-      "watch": "tsc -watch -p ./"
-  },
-  "devDependencies": {
-      "@types/node": "^18",
-      "@types/vscode": "^1.73.0",
-      "@typescript-eslint/eslint-plugin": "^6.7.0",
-      "@typescript-eslint/parser": "^6.7.0",
-      "eslint": "^8.26.0",
-      "typescript": "^5.4.2"
-  }
+                        }
+                    }
+                },
+                "CustomTextModification.quickCommand5": {
+                    "description": "Configuration of favorite command triggered by quick command 5",
+                    "type": "object",
+                    "properties": {
+                        "command": {
+                            "type": "string"
+                        },
+                        "arguments": {
+                            "type": "array"
+                        }
+                    }
+                },
+                "CustomTextModification.currentDirectoryKind": {
+                    "description": "Current directory for shell commands",
+                    "type": "string",
+                    "enum": [
+                        "currentFile",
+                        "workspaceRoot"
+                    ],
+                    "default": "currentFile"
+                },
+                "CustomTextModification.shell.linux": {
+                    "description": "Linux shell used to run commands",
+                    "type": "string",
+                    "default": "/bin/sh"
+                },
+                "CustomTextModification.shellArgs.linux": {
+                    "description": "Additional arguments for the shell",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "-c"
+                    ]
+                },
+                "CustomTextModification.shell.osx": {
+                    "description": "OSX shell used to run commands",
+                    "type": "string",
+                    "default": "/bin/sh"
+                },
+                "CustomTextModification.shellArgs.osx": {
+                    "description": "Additional arguments for the shell",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "-c"
+                    ]
+                },
+                "CustomTextModification.shell.windows": {
+                    "description": "Windows shell used to run commands",
+                    "type": "string",
+                    "default": "cmd.exe"
+                },
+                "CustomTextModification.shellArgs.windows": {
+                    "description": "Additional arguments for the shell",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "/d",
+                        "/s",
+                        "/c"
+                    ]
+                },
+                "CustomTextModification.history": {
+                "description": "History of executed commands",
+                "type": "array"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "lint": "eslint \"src/**/*.ts\"",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/node": "^18",
+        "@types/vscode": "^1.73.0",
+        "@typescript-eslint/eslint-plugin": "^6.7.0",
+        "@typescript-eslint/parser": "^6.7.0",
+        "eslint": "^8.26.0",
+        "typescript": "^5.4.2"
+    }
 }

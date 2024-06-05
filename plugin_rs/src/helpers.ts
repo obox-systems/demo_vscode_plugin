@@ -50,18 +50,15 @@ async function getCommandText(): Promise<string|undefined> {
 		return vscode.window.showInputBox({
 			placeHolder: 'Enter a command',
 			prompt: 'No history available yet'
-
 		});
 	}
 
-	history.push('Enter new command...');
+	history.push('Enter new command');
 
 	const placeholder = {
-		ignoreFocusOut: true,
 		canPickMany: false,
 		placeHolder: 'Select a command option'
 	};
-	vscode.window.showInformationMessage(history.join());
 	const pickedCommand = await vscode.window.showQuickPick(history.reverse(), placeholder);
 
 	const options = getInputBoxOption(pickedCommand);
@@ -70,7 +67,7 @@ async function getCommandText(): Promise<string|undefined> {
 }
 
 function getInputBoxOption(pickedCommand?: string) {
-	if (pickedCommand == 'Enter new command...' || !pickedCommand) {
+	if (pickedCommand == 'Enter new command' || !pickedCommand) {
 		return {placeHolder: 'Enter a command'};
 	}
 	return {

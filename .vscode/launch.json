@@ -12,7 +12,7 @@
             "outFiles": [
                 "${workspaceFolder}/plugin_rs/out/**/*.js"
             ],
-            "preLaunchTask": "npm: watch"
+            "preLaunchTask": "npm: watch plugin_rs"
         },
         {
             "name": "PluginTS",
@@ -25,7 +25,7 @@
             "outFiles": [
                 "${workspaceFolder}/plugin_ts/out/**/*.js"
             ],
-            "preLaunchTask": "npm: watch"
+            "preLaunchTask": "npm: watch plugin_ts"
         }
     ]
 }
