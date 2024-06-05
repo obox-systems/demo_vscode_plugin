@@ -10,11 +10,15 @@ Implemented using `napi-rs` - a framework for building compiled Node.js add-ons 
  - custom_command/ - contains Napi project with Rust source files that will be build into native module for Node.js
 
 #### To build:
-1. Install extension dependencies
+1. Go to project directory:
+```bash
+cd ./plugin_rs
+```
+2. Install extension dependencies
 ```bash
 npm install
 ```
-2. Build Rust module:
+3. Build Rust module:
 ```bash
 cd custom_command
 ```
@@ -32,11 +36,12 @@ napi build --platform --release
 ```
 
 #### To run in debug mode:
+When plugin is built, it can be run in debug mode to test functionality.
 1. Open `extension.ts` in VSCode and run with F5.
-2. Select text to modify and open Command Palette.
-3. Select `Run custom command` and type custom command in window.
+2. Select text to modify and open `Command Palette` by pressing `Ctrl` + `Shift` + `P` or by navigating to `View` -> `Command Palette` in VSCode menu.
+3. Select `CustomTextModification: Modify text with utility` and select command from history or type command in window.
 
-#### To build extension:
+#### To build extension package:
 1. Install Visual Studio Code Extensions command line tool `vsce`:
 ```bash
 npm install -g @vscode/vsce
@@ -57,17 +62,22 @@ Implemented with plain TypeScript.
  - src/ - contains extension source functions that interact with VSCode API.
 
 #### To build:
-1. Install extension dependencies
+1. Go to project directory:
+```bash
+cd ./plugin_ts
+```
+2. Install extension dependencies
 ```bash
 npm install
 ```
 
 #### To run in debug mode:
+When plugin is built, it can be run in debug mode to test functionality.
 1. Open `extension.ts` in VSCode and run with F5.
-2. Select text to modify and open Command Palette.
-3. Select `Run custom command` and type custom command in window.
+2. Select text to modify and open `Command Palette` by pressing `Ctrl` + `Shift` + `P` or by navigating to `View` -> `Command Palette` in VSCode menu.
+3. Select `CustomTextModification: Modify text with utility` and select command from history or type command in window.
 
-#### To build extension:
+#### To build extension package:
 1. Install Visual Studio Code Extensions command line tool `vsce`:
 ```bash
 npm install -g @vscode/vsce
@@ -80,4 +90,3 @@ vsce package
 - switch to `Extensions` panel
 - select `Install from VSIX` in menu
 - select .vsix package created by previous command
-
