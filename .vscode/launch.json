@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Extension",
+            "name": "PluginRS",
             "type": "extensionHost",
             "request": "launch",
             "runtimeExecutable": "${execPath}",
@@ -12,10 +12,10 @@
             "outFiles": [
                 "${workspaceFolder}/plugin_rs/out/**/*.js"
             ],
-            "preLaunchTask": "npm: watch"
+            "preLaunchTask": "npm: watch plugin_rs"
         },
         {
-            "name": "Extension",
+            "name": "PluginTS",
             "type": "extensionHost",
             "request": "launch",
             "runtimeExecutable": "${execPath}",
@@ -25,7 +25,7 @@
             "outFiles": [
                 "${workspaceFolder}/plugin_ts/out/**/*.js"
             ],
-            "preLaunchTask": "npm: watch"
+            "preLaunchTask": "npm: watch plugin_ts"
         }
     ]
 }

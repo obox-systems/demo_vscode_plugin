@@ -21,7 +21,8 @@
         "commands": [
             {
                 "command": "CustomTextModification.runCommand",
-                "title": "Modify text with utility"
+                "title": "Modify text with utility",
+                "category": "CustomTextModification"
             },
             {
                 "command": "CustomTextModification.quickCommand1",

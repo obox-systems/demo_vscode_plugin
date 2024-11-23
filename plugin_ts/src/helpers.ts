@@ -38,11 +38,43 @@ function getWorkingDir(filePath?: string) {
 	}
 }
 
-async function getCommandText(): Promise<string|undefined> {
-	return vscode.window.showInputBox({
-		placeHolder: 'Enter a command',
-		prompt: 'No history available yet'
-	});
+function getHistory(): string[] {
+    const storedHistory = getConfig(`${EXTENSION_NAME}.history`) as string[];
+    return storedHistory || [];
 }
 
-export {getCommandText, getConfig, getWorkingDir, getOS, EXTENSION_NAME};
+async function getCommandText(): Promise<string|undefined> {
+
+	const history = getHistory();
+	if (history.length === 0) {
+		return vscode.window.showInputBox({
+			placeHolder: 'Enter a command',
+			prompt: 'No history available yet'
+		});
+	}
+
+	history.push('Enter new command');
+
+	const placeholder = {
+		canPickMany: false,
+		placeHolder: 'Select a command option'
+	};
+	const pickedCommand = await vscode.window.showQuickPick(history.reverse(), placeholder);
+
+	const options = getInputBoxOption(pickedCommand);
+	return vscode.window.showInputBox(options);
+
+}
+
+function getInputBoxOption(pickedCommand?: string) {
+	if (pickedCommand == 'Enter new command' || !pickedCommand) {
+		return {placeHolder: 'Enter a command'};
+	}
+	return {
+		placeHolder: 'Enter a command',
+		prompt: 'Edit the command if necessary',
+		value: pickedCommand
+	};
+}
+
+export {getCommandText, getConfig, getWorkingDir, getOS, EXTENSION_NAME, getHistory};

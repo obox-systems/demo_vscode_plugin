@@ -2,12 +2,12 @@
 
 import * as vscode from 'vscode';
 import { ChildProcess, spawn } from 'child_process';
-import { getCommandText, getConfig, getWorkingDir, getOS, EXTENSION_NAME } from './helpers' ;
+import { getCommandText, getWorkingDir, getConfig, getOS, EXTENSION_NAME, getHistory } from './helpers';
 
 const CUSTOM_COMMANDS_NUMBER = 5;
 
 export function activate(context: vscode.ExtensionContext) {
-	vscode.commands.registerCommand('extension.runCustomCommand', async () => {
+	vscode.commands.registerCommand(`${EXTENSION_NAME}.runCommand`, async () => {
 		executeCustomCommand(context);
 	});
 
@@ -19,8 +19,9 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 			
-			const args = getConfig(`${EXTENSION_NAME}.quickCommand${i}.arguments`);
-			await modifySelected(`${command} ${args}`, context);
+			const args = getConfig(`${EXTENSION_NAME}.quickCommand${i}.arguments`) as string[];
+			const args_str = args.join(' ');
+			await modifySelected(`${command} ${args_str}`, context);
 		});
 	}
 }
@@ -28,6 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
 async function executeCustomCommand(context: vscode.ExtensionContext) {
 	const command = await getCommandText();
 	if (!command) return;
+	updateHistory(command);
 
 	await modifySelected(command, context);
 }
@@ -43,14 +45,18 @@ async function modifySelected(command: string, context: vscode.ExtensionContext)
 
 	let selected =  editor?.selections.map(selection => editor.document.getText(selection));
 
-	const outputPromise = selected?.map(input => runCommand(command, input, file));
-	const commandOutputs = await Promise.all(outputPromise || []);
+	try {
+		const outputPromise = selected?.map(input => runCommand(command, input, file));
+		const commandOutputs = await Promise.all(outputPromise || []);
 
-	await editor?.edit(editBuilder => {
-		editor.selections.forEach((selection, index) => {
-			editBuilder.replace(selection, commandOutputs[index]);
+		await editor?.edit(editBuilder => {
+			editor.selections.forEach((selection, index) => {
+				editBuilder.replace(selection, commandOutputs[index]);
+			});
 		});
-	});
+	} catch (error) {
+		vscode.window.showErrorMessage(`Failed to execute command: ${error}`);
+	}
 }
 
 async function runCommand(command: string, input: string, filePath: string|undefined): Promise<string> {
@@ -71,7 +77,6 @@ async function runCommand(command: string, input: string, filePath: string|undef
 }
 
 async function runExecution(command: ChildProcess, inputString: string): Promise<string> {
-	vscode.window.showInformationMessage(inputString);
 	let stdoutString = '';
 	let stderrString = '';
 
@@ -100,4 +105,11 @@ async function runExecution(command: ChildProcess, inputString: string): Promise
 			}
 		});
 	});
+}
+
+// Function to update and save history to workspaceState
+function updateHistory(newCommand: string): void {
+    const history = getHistory();
+    history.push(newCommand);
+    vscode.workspace.getConfiguration().update(`${EXTENSION_NAME}.history`, history, vscode.ConfigurationTarget.Global);
 }
